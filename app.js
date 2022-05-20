@@ -17,8 +17,9 @@ const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const imageUploader = require('./util/imageUploader');
 const memberRequestRouter = require('./resource/memberRequest/memberRequest.router');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const productRouter = require('./resource/product/product.router');
+const groceryRouter = require('./resource/grocery/grocery.router');
 
 const app = express();
 
@@ -80,7 +81,9 @@ app.use(imageUploader);
 mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => {
-        console.log(`database connected successfully at ${new Date().toLocaleString()}`);
+        console.log(
+            `database connected successfully at ${new Date().toLocaleString()}`
+        );
     })
     .catch((err) => {
         console.log(err);
@@ -90,6 +93,7 @@ mongoose
 app.use('/api/v1/hostels', hostelRouter);
 app.use('/api/v1/stores', storeRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/grocery', groceryRouter);
 app.use('/api/v1/stores', storeRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/hostelsAds', hostelsAdRouter);
