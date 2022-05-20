@@ -66,4 +66,10 @@ const hostelsAdModel = new mongoose.Schema(
     }
 );
 
+// populate hostel's ad with hostel's data
+hostelsAdModel.pre(/^find/, function (next) {
+    this.populate('hostel');
+    next();
+});
+
 module.exports = mongoose.model('HostelsAd', hostelsAdModel);

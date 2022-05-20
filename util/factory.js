@@ -42,7 +42,9 @@ const getAll = (Model, popOptions) =>
         res.status(200).json({
             status: 'success',
             results: data.length,
-            data,
+            data: {
+                data,
+            },
         });
     });
 
@@ -58,7 +60,9 @@ const getOne = (Model, popOption) =>
         }
         res.status(200).json({
             status: 200,
-            data,
+            data: {
+                data,
+            },
             message: 'Successfully retrieved one document',
         });
     });
@@ -70,7 +74,9 @@ const createOne = (Model) =>
 
         res.status(201).json({
             status: 'success',
-            data,
+            data: {
+                data,
+            },
         });
     });
 
@@ -88,7 +94,9 @@ const updateOne = (Model) =>
 
         res.status(200).json({
             status: 'success',
-            data,
+            data: {
+                data,
+            },
         });
     });
 

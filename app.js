@@ -17,6 +17,7 @@ const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const imageUploader = require('./util/imageUploader');
 const memberRequestRouter = require('./resource/memberRequest/memberRequest.router');
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -41,6 +42,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
@@ -59,11 +61,11 @@ app.use(
 );
 
 // middleware to log the request
-app.use((req, res, next) => {
-    // console.log(`${req.protocol}://${req.get('host')}${req.originalUrl}`);
-    console.log('req', req.body);
-    next();
-});
+// app.use((req, res, next) => {
+//     // console.log(`${req.protocol}://${req.get('host')}${req.originalUrl}`);
+//     console.log('req', req.body);
+//     next();
+// });
 
 // file upload middleware
 app.use(fileUpload({ useTempFiles: true }));
