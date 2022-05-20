@@ -18,6 +18,7 @@ const fileUpload = require('express-fileupload');
 const imageUploader = require('./util/imageUploader');
 const memberRequestRouter = require('./resource/memberRequest/memberRequest.router');
 const bodyParser = require("body-parser");
+const productRouter = require('./resource/product/product.router');
 
 const app = express();
 
@@ -89,6 +90,8 @@ mongoose
 app.use('/api/v1/hostels', hostelRouter);
 app.use('/api/v1/stores', storeRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/stores', storeRouter);
+app.use('/api/v1/products', productRouter);
 app.use('/api/v1/hostelsAds', hostelsAdRouter);
 app.use('/api/v1/memberRequests', memberRequestRouter);
 

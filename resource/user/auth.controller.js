@@ -56,9 +56,12 @@ const login = catchAsync(async (req, res, next) => {
         return next(new AppError('Please provide email and password', 400));
     }
 
-    const user = await User.findOne({ email })
+    const query = User.findOne({ email })
         .select('+password')
-        .populate({ path: 'hostel' });
+        .populate({ path: 'hostel' })
+        .populate({ path: 'store' });
+
+    const user = await query;
 
     // check password is correct
     if (!user || !(await user.comparePassword(password, user.password))) {
@@ -91,9 +94,11 @@ const protect = catchAsync(async (req, res, next) => {
 
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 
-    const currentUser = await User.findById(decoded.id).populate({
-        path: 'hostel',
-    });
+    const query = User.findById(decoded.id)
+        .populate({ path: 'hostel' })
+        .populate({ path: 'store' });
+
+    const currentUser = await query;
 
     if (!currentUser) {
         return next(
@@ -111,7 +116,7 @@ const protect = catchAsync(async (req, res, next) => {
     }
 
     req.user = currentUser;
-    
+
     next();
 });
 

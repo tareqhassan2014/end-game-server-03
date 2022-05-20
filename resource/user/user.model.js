@@ -101,11 +101,11 @@ userSchema.virtual('hostel', {
     localField: '_id',
 });
 
-// UserModel.virtual('store', {
-//     ref: 'Store',
-//     foreignField: 'vendor',
-//     localField: '_id',
-// });
+userSchema.virtual('store', {
+    ref: 'Store',
+    foreignField: 'vendor',
+    localField: '_id',
+});
 
 // add a query middleware
 userSchema.pre(/^find/, function (next) {
